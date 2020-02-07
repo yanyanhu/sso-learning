@@ -1,0 +1,33 @@
+discovery-url: https://$SSO_SERVER_IP/auth/realms/demo
+#discovery-url: http://$SSO_SERVER_IP:8080/auth/realms/demo
+client-id: demo-service
+client-secret: $CLIENT_SECRET
+enable-default-deny: true
+secure-cookie: false
+encryption_key: $ENCRYPTION_KEY
+listen: :3000
+redirection-url: http://$SSO_SERVER_IP:3000
+upstream-url: http://$SSO_SERVER_IP:9090
+skip-openid-provider-tls-verify: true
+
+scopes:
+- demo-member
+- demo-admin
+
+resources:
+- uri: /admin
+  methods:
+  - GET
+  roles:
+  - demo-service:admin
+
+- uri: /member
+  methods:
+  - GET
+  roles:
+  - demo-service:member
+  - demo-service:admin
+  require-any-role: true
+
+headers:
+  gateway: http://$SSO_SERVER_IP:3000

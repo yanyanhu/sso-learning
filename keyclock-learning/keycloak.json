@@ -1,0 +1,11 @@
+{
+  "realm": "demo",
+  "enabled": true,
+  "auth-server-url": "http://localhost:8080/auth",
+  "ssl-required" : "external",
+  "verify-token-audience": true,
+  "resource": "vanilla",
+  "credentials": {
+    "secret": "$SECRECT"
+  }
+}

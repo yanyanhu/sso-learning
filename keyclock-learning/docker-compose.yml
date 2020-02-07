@@ -1,0 +1,31 @@
+version: '2'
+
+networks:
+  basic:
+
+services:
+  keycloak:
+    image: jboss/keycloak
+    container_name: keycloak
+    ports: 
+      - 8080:8080
+      - 443:8443
+    environment:
+      - KEYCLOAK_USER=$USER
+      - KEYCLOAK_PASSWORD=$PASSWORD
+    networks:
+      - basic
+
+  gatekeeper:
+    image: keycloak/keycloak-gatekeeper
+    container_name: gatekeeper
+    ports:
+      - 3000:3000
+    volumes:
+      - ./gatekeeper/config.yml:/etc/keycloak/config.yml
+      - ./certs:/etc/keycloak/certs
+    entrypoint:
+      - /opt/keycloak-gatekeeper
+      - --config=/etc/keycloak/config.yml
+    networks: 
+      - basic

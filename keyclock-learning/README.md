@@ -31,3 +31,14 @@ Run app/index_with_adapter.js
 ## How to request
 1. request on `<yourOwnIP>:3000/admin`
 2. request on `<yourOwnIP>:3000/user`
+
+## To add init Admin user
+```
+docker exec <CONTAINER> /opt/jboss/keycloak/bin/add-user-keycloak.sh -u <USERNAME> -p <PASSWORD>
+```
+Then restarting the container:
+```
+docker restart <CONTAINER>
+```
+Refer to https://hub.docker.com/r/jboss/keycloak/ to get more information.
+

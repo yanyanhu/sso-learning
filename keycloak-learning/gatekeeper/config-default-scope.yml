@@ -10,22 +10,24 @@ redirection-url: http://$SSO_SERVER_IP:3000
 upstream-url: http://$SSO_SERVER_IP:9090
 skip-openid-provider-tls-verify: true
 
-scopes:
-- admin-apis
-- member-apis
+#scopes:
+#- demo-member
+#- demo-admin
 
 resources:
 - uri: /admin
   methods:
   - GET
   roles:
-  - admin-api-user
+  - demo-service:admin
 
 - uri: /member
   methods:
   - GET
   roles:
-  - member-api-user
+  - demo-service:member
+  - demo-service:admin
+  require-any-role: true
 
 headers:
   gateway: http://$SSO_SERVER_IP:3000

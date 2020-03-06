@@ -1,5 +1,5 @@
-discovery-url: https://$SSO_SERVER_IP/auth/realms/demo
-#discovery-url: http://$SSO_SERVER_IP:8080/auth/realms/demo
+#discovery-url: https://$SSO_SERVER_IP:443/auth/realms/demo
+discovery-url: http://$SSO_SERVER_IP:8080/auth/realms/demo
 client-id: demo-service
 client-secret: $CLIENT_SECRET
 enable-default-deny: true

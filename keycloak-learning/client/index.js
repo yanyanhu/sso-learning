@@ -8,14 +8,15 @@ var globalToken;
 async function getPassword() {
     try {
         const instance = axios.create({
-            baseURL: 'http://$SSO_HOST_IP:8080/',
+	    baseURL: 'http://$SSO_SERVER_IP:8080/',
             timeout: 1000
         });
         const data = qs.stringify({
-            username: '$USER',
+            username: 'demo-frontend-user',
+            //username: 'external-service-01',
             password: '$PASSWORD',
-            client_id: '$CLIENT_ID',
-            client_secret: 'CLIENT_SECRET',
+            client_id: 'demo-backend-service',
+            client_secret: '$CLIENT-SECRET',
             grant_type: 'password'
         })
 
@@ -25,7 +26,7 @@ async function getPassword() {
             data,
             hearders);
         globalToken = result.data.access_token;
-        console.log(globalToken);
+        console.log("Getting global token successfully:" + globalToken);
     } catch (error) {
         console.log(error);
     }
@@ -35,13 +36,13 @@ async function getPassword() {
 async function requestServer() {
     try {
         const instance = axios.create({
-            baseURL: 'http://$SSO_HOST_IP:3000/',
+            baseURL: 'http://$SSO_SERVER_IP:3001/',
             timeout: 1000,
             headers: { 'Authorization': `Bearer ${globalToken}` }
         });
 
-        var result = await instance.get(
-            '/user');
+        var result = await instance.get('/demo-frontend-api');
+        //var result = await instance.get('/external-service-api');
         console.log(result.data);
     } catch (error) {
         console.log(error);

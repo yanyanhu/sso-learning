@@ -1,13 +1,13 @@
 #discovery-url: https://$SSO_SERVER_IP:443/auth/realms/demo
 discovery-url: http://$SSO_SERVER_IP:8080/auth/realms/demo
-client-id: demo-frontend-service
+client-id: demo-backend-service
 client-secret: $CLIENT-SECRET
 enable-default-deny: true
 secure-cookie: false
 #encryption_key: $ENCRYPTION_KEY
-listen: :3000
-redirection-url: http://$SSO_SERVER_IP:3000
-upstream-url: http://$SSO_SERVER_IP:9090
+listen: :3001
+redirection-url: http://$SSO_SERVER_IP:3001
+upstream-url: http://$SSO_SERVER_IP:9091
 skip-openid-provider-tls-verify: true
 
 #scopes:
@@ -15,19 +15,17 @@ skip-openid-provider-tls-verify: true
 #- demo-admin
 
 resources:
-- uri: /admin
+- uri: /demo-frontend-api
   methods:
   - GET
   roles:
-  - demo-frontend-service:admin
+  - demo-backend-service:demo-frontend-role
 
-- uri: /member
+- uri: /external-service-api
   methods:
   - GET
   roles:
-  - demo-frontend-service:member
-  - demo-frontend-service:admin
-  require-any-role: true
+  - demo-backend-service:other-external-services-role
 
 headers:
-  gateway: http://$SSO_SERVER_IP:3000
+  gateway: http://$SSO_SERVER_IP:3001

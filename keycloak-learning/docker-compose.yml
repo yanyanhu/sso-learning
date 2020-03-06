@@ -9,10 +9,12 @@ services:
     container_name: keycloak
     ports: 
       - 8080:8080
-      - 443:8443
+      - 8443:8443
     environment:
-      - KEYCLOAK_USER=$USER
-      - KEYCLOAK_PASSWORD=$PASSWORD
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=$PASS
+    volumes:
+      - ./keycloak-tmp:/tmp
     networks:
       - basic
 
@@ -23,6 +25,20 @@ services:
       - 3000:3000
     volumes:
       - ./gatekeeper/config.yml:/etc/keycloak/config.yml
+      - ./certs:/etc/keycloak/certs
+    entrypoint:
+      - /opt/keycloak-gatekeeper
+      - --config=/etc/keycloak/config.yml
+    networks: 
+      - basic
+
+  gatekeeper-02:
+    image: keycloak/keycloak-gatekeeper
+    container_name: gatekeeper-02
+    ports:
+      - 3001:3001
+    volumes:
+      - ./gatekeeper/config-02.yml:/etc/keycloak/config.yml
       - ./certs:/etc/keycloak/certs
     entrypoint:
       - /opt/keycloak-gatekeeper

@@ -115,3 +115,7 @@ docker restart <CONTAINER>
 ```
 Refer to https://hub.docker.com/r/jboss/keycloak/ to get more information.
 
+
+## IDPs
+1. [Google social login](./idps/google-social-login-with-keycloak.md)
+

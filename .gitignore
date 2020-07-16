@@ -6,3 +6,4 @@ coverage/
 certs/
 nohup*
 *tmp*
+.DS_Store

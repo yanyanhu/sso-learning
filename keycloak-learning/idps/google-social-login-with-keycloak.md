@@ -32,7 +32,8 @@ https://${KEYCLOAK-SERVER-PRIVATE-IP}.xip.io/auth/realms/${REALM-NAME}
 ```
 
 ## Have a try
-Bootup the gatekeeper and setup the App and have a try. Now both google account and keycloak users should be allowed to login and access your application interfaces being protected.
+Bootup the gatekeeper and setup the App and have a try. Now both google account and keycloak users should be allowed to login and access your application interfaces being protected. The login page should look like the following:
+![Alt text](../images/keycloak-google-idp-login-example.png?raw=true "google-idp-login")
 
 
 ## Reference:
